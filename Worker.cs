@@ -6,6 +6,7 @@ namespace Samp
     {
         private readonly ILogger<Worker> _logger;
         private readonly TimeSpan _period=TimeSpan.FromSeconds(5);
+        private int _count = 0;
 
         public Worker(ILogger<Worker> logger)
         {
@@ -37,6 +38,10 @@ namespace Samp
                 {
                     break;
                 }
+                string fname = "Fname"+_count+".txt";
+                File.Create(fname);
+                _count++;
+
                 string text=DateTime.Now.ToString()+" "+"\n";
                 File.AppendAllText("file1.txt",text);
                 _logger.LogInformation(DateTime.Now.ToString());
